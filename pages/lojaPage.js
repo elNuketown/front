@@ -12,5 +12,5 @@ class LojaPage {
     await this.loginButton.click();
   }
 }
-//
+
 export default LojaPage;
