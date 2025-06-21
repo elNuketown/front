@@ -1,46 +1,40 @@
-name: CI
+name: Run Tests on Commit
 
 on:
   push:
-    branches: [ main ]          # rode sempre que houver commit no branch main
-  pull_request:                 # opcional – roda em PRs também
+    branches:
+      - main     # Defina a branch que você quer monitorar (geralmente 'main' ou 'master')
+  pull_request:
+    branches:
+      - main     # Ações para pull request na branch 'main'
 
 jobs:
-  build-test:
-    runs-on: ubuntu-latest
+  test:
+    runs-on: ubuntu-latest  # Usando o Ubuntu mais recente como ambiente de execução
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+    - name: Check out the repository
+      uses: actions/checkout@v2  # Faz o checkout do código do repositório
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 20
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '14'   # Usando a versão do Node.js que você precisa, aqui é a 14.x
 
-      - name: Instalar dependências
-        run: npm ci
+    - name: Install Dependencies
+      run: |
+        npm install  # Instala as dependências do projeto
 
-      - name: Executar testes
-        run: |
-          npm test -- --ci --reporters=default --reporters=jest-junit
-        env:
-          JEST_JUNIT_OUTPUT: reports/junit.xml        # caminho do relatório JUnit
+    - name: Run Tests with Cucumber and Playwright
+      run: |
+        npx cucumber-js  # Roda os testes com o Cucumber
 
-      - name: Gerar relatório HTML do Cucumber (se aplicável)
-        if: ${{ hashFiles('**/*.feature') != '' }}
-        run: |
-          node scripts/generateReport.js              # seu script gerador
-          ls -R reports
+    - name: Generate Allure Report
+      run: |
+        npm run generate-report  # Gera o relatório Allure
 
-      - name: Publicar artefatos
-        uses: actions/upload-artifact@v4
-        with:
-          name: relatorios-testes                     # aparecerá na UI do GitHub
-          path: reports/                              # pasta enviada
-
-      - name: Resumo no Job
-        run: |
-          echo "### ✅ Pipeline concluída" >> $GITHUB_STEP_SUMMARY
-          echo "*Commit:* ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "*Relatórios:* disponíveis em artefatos" >> $GITHUB_STEP_SUMMARY
+    - name: Upload Allure Report as Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: allure-report
+        path: allure-report   # Faz o upload do relatório gerado para que você possa baixá-lo depois
