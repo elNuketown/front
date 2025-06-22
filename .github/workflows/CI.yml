@@ -1,4 +1,4 @@
-name: Run Tests on Commit
+name: Testes pós commit
 
 on:
   push:
@@ -13,23 +13,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
+    - name: Validação de repositório
       uses: actions/checkout@v2
 
-    - name: Set up Node.js
+    - name: Configurando Node.js
       uses: actions/setup-node@v2
       with:
         node-version: '18'
 
-    - name: Install Dependencies
+    - name: Instalando dependências
       run: |
         npx playwright install
-        npm install  # Instala as dependências do projeto
+        npm install
 
-    - name: Run Tests with Cucumber and Playwright
+    - name: Executando testes
       run: |
-        npx cucumber-js  # Roda os testes com o Cucumber
+        npx cucumber-js
 
-    - name: Generate Report
+    - name: Gerando Relatorio
       run: |
-        npm run generate-report  # Gera o relatório Allure
+        npm run generate-report
+    
+    - name: Upload do relatorio
+      uses: actions/upload-artifact@v3
+      with:
+        name: cucumber-report
+        path: cucumber-report
