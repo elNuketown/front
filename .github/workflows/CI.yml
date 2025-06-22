@@ -30,12 +30,6 @@ jobs:
       run: |
         npx cucumber-js  # Roda os testes com o Cucumber
 
-    - name: Generate Allure Report
+    - name: Generate Report
       run: |
         npm run generate-report  # Gera o relatório Allure
-
-    - name: Upload Allure Report as Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: allure-report
-        path: allure-report
