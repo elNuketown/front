@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "npx cucumber-js",
-      "generate-report": "node generateReport.js"
+      "generate-report": "node generateReport.cjs"
   },
   "dependencies": {
     "playwright": "^1.18.0"
