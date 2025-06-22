@@ -3,23 +3,23 @@ name: Run Tests on Commit
 on:
   push:
     branches:
-      - main     # Defina a branch que você quer monitorar (geralmente 'main' ou 'master')
+      - main
   pull_request:
     branches:
-      - main     # Ações para pull request na branch 'main'
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Usando o Ubuntu mais recente como ambiente de execução
+    runs-on: ubuntu-latest
 
     steps:
     - name: Check out the repository
-      uses: actions/checkout@v2  # Faz o checkout do código do repositório
+      uses: actions/checkout@v2
 
     - name: Set up Node.js
       uses: actions/setup-node@v2
       with:
-        node-version: '16'   # Usando a versão do Node.js que você precisa, aqui é a 14.x
+        node-version: '18'
 
     - name: Install Dependencies
       run: |
@@ -37,4 +37,4 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: allure-report
-        path: allure-report   # Faz o upload do relatório gerado para que você possa baixá-lo depois
+        path: allure-report
