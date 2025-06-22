@@ -23,6 +23,7 @@ jobs:
 
     - name: Install Dependencies
       run: |
+        npx playwright install
         npm install  # Instala as dependências do projeto
 
     - name: Run Tests with Cucumber and Playwright
