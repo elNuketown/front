@@ -1,50 +1,61 @@
-# Projeto de Automação de Testes com Cucumber e Playwright
+# Testes de Front Web com JS + PlayWright + Cucumber
 
-Este projeto utiliza **Cucumber** e **Playwright** para automação de testes de aplicações web. Os testes são estruturados com **BDD (Behavior Driven Development)** e os resultados são gerados usando **HTML Reporter**.
+Este projeto utiliza Playwright + JavaScript + Cucumber para realizar validações de Web
 
-## 📁 Estrutura 
+## 📁 Estrutura do Projeto
 ```
-project/
+front/
+├── .github/
+│   └── workflows/
+│       └── CI.yml
 ├── features/
-│   ├── login.feature
+│   ├── step_definitions/
+│   │   └── compra.steps.js
 │   └── compra.feature
-├── step_definitions/
-│   ├── login.steps.js
-│   └── compra.steps.js
 ├── pages/
-│   ├── lojaPage.js
 │   ├── carrinhoPage.js
-│   └── checkoutPage.js
-│   └── checkoutFinalPage.js
-├── cucumber.js
-├── generateReport.js
+│   ├── checkoutFinalPage.js
+│   ├── checkoutPage.js
+│   └── lojaPage.js
+├── .gitignore
+├── cucumber.cjs
+├── generateReport.cjs
 ├── package.json
 └── README.md
 ```
 
-## Pré-requisitos
+## ⚙️ Requisitos
 Certifique-se de ter as seguintes ferramentas instaladas no seu ambiente:
 
-- [Node.js](https://nodejs.org/) versão 14.x ou superior.
-- [NPM](https://www.npmjs.com/) (gerenciador de pacotes do Node.js).
-- Playwright
-- Cucumber 
-- HTML Reporter
 
-## ✅Como executar
+| Item                   | Versão/Requisito                               |
+|------------------------|------------------------------------------------|
+| Node.js                | 18 LTS ou superior                             |
+| Playwright             | ^1.18.0                                        |
+| @playwright/test       | ^1.53.1                                        |
+| Cucumber               | ^11.3.0 (`@cucumber/cucumber`)                 |
+| Cucumber HTML Reporter | ^7.2.0 (`cucumber-html-reporter`)              |
+| Allure CLI             | ^2.34.0 (`allure-commandline`)                 |
 
-1.Instalar dependências
+
+## ✅ Como Executar os Testes
+
+### 1. Instalação as dependências:
 
 npm install
 
-2.Executar testes
+### 2. Execução de testes:
 
 npx cucumber-js
 
-3.Gerar relatorios:
+### 3. Geração de relatorios:
 
 npm run generate-report
+
+---
 
 ## 👨‍💻 Autor
 
 Vinicios Virissimo
+
+---
