@@ -25,8 +25,6 @@ front/
 ```
 
 ## ⚙️ Requisitos
-Certifique-se de ter as seguintes ferramentas instaladas no seu ambiente:
-
 
 | Item                   | Versão/Requisito                               |
 |------------------------|------------------------------------------------|
